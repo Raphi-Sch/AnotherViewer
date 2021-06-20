@@ -23,7 +23,7 @@ function query(sql, data) {
   }));
 }
 
-module.exports = {query}
+module.exports = {query, db}
 
 function getConfig() {
   let config = require('./db.json');
