@@ -1,9 +1,13 @@
 version: '3'
 services:
   app:
-    build: .
+    build: back
     links:
       - "mysql_db:db"
+  front:
+    build: front
+    ports:
+      - "8080:8080"
   mysql_db:
     image: mysql:latest
     container_name: mysql
@@ -16,4 +20,4 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      - ./back/db:/docker-entrypoint-initdb.d

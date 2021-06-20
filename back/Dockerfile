@@ -11,6 +11,6 @@ RUN npm install fs
 RUN npm install mysql2
 RUN npm install dateformat
 
-COPY ./src .
+COPY src .
 
 CMD [ "node", "listener.js" ]
