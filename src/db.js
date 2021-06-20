@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var config = require('db.conf');
+var config = require('./db.json');
 
 var db = mysql.createConnection({
     host: config["db_host"],
