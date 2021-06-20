@@ -11,9 +11,9 @@ function getAllMessages(req, res) {
 }
 
 async function insertMessage(channel, user, message) {
-    let datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    console.log("Channel : " + channel + " | User : " + user['username'] + " | Msg : " + message);
-    await db.query("INSERT INTO `chat` (`id`, `channel_id`, `user_name`, `datetime`, `message`) VALUES (NULL, ?, ?, ?, ?);", [channel, user['username'], datetime, message]);
+    let date = new Date();
+    console.log("[" + dateFormat(date, "HH:MM:ss") + "] Channel : " + channel + " | User : " + user['username'] + " | Msg : " + message);
+    await db.query("INSERT INTO `chat` (`id`, `channel_id`, `user_name`, `datetime`, `message`) VALUES (NULL, ?, ?, ?, ?);", [channel, user['username'], dateFormat(date, "yyyy-mm-dd HH:MM:ss"), message]);
 }
 
 module.exports = { getAllMessages, insertMessage };
