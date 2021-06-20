@@ -37,18 +37,19 @@
         <div class="col-sm-12 main">
 
           <!-- Tchat Section -->
-          <h2 class="sub-header">Tchat</h2>
-          <button onclick="clear_tchat()" type="button" class="btn btn-info">Clear</button>
+          <h2 class="sub-header">Chat</h2>
+          <button onclick="clear_chat()" type="button" class="btn btn-info">Clear</button>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Pseudo</th>
+                  <th>Timestamp</th>
+                  <th>Channel</th>
+                  <th>Username</th>
                   <th>Message</th>
                 </tr>
               </thead>
-              <tbody id="tchat-incoming">
+              <tbody id="chat-incoming">
                   <!-- Tchat add dynamic -->
               </tbody>
             </table>
@@ -65,7 +66,7 @@
     <script>
         const socket = io.connect('http://'+ window.location.hostname + ':3000');
 
-        socket.on('tchat-incoming', function(num, pseudo, text, type){
+        socket.on('chat-incoming', function(num, pseudo, text, type){
           var tr = document.createElement('tr');
           tr.className=type;
 
@@ -82,11 +83,11 @@
           tr.appendChild(td_pseudo);
           tr.appendChild(td_text);
 
-          document.getElementById('tchat-incoming').insertAdjacentElement('afterbegin',  tr);
+          document.getElementById('chat-incoming').insertAdjacentElement('afterbegin',  tr);
         })
 
-        function clear_tchat(){
-          document.getElementById('tchat-incoming').innerHTML = "";
+        function clear_chat(){
+          document.getElementById('chat-incoming').innerHTML = "";
         }
     </script>
 </body></html>
