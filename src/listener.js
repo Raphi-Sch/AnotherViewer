@@ -25,13 +25,6 @@ client.connect();
 // Events
 client.on('connected', async (adress, port) => {
     console.log("[TWITCH] Connected on : " + adress)
-
-    setInterval(async function(){
-        var result = await commands.timeTrigger();
-        if(result){
-            send(result);
-        }
-    }, 60000);
 });
 
 client.on('disconnected', function(){
@@ -39,14 +32,9 @@ client.on('disconnected', function(){
 });
 
 client.on('chat', async (channel, user, message, isSelf) => {
-    var result = null;
-
-    // Do not react to himself
+    // Do not check himself
     if (isSelf) return;
 
-    console.log(channel);
-    console.log(user);
-    console.log(message);
-    console.log("----------------------------------------------------");
+    console.log("Channel : " + channel + " | User : " + user['id'] + " - " + user['username'] + " | Msg : " + message);
 
 });
