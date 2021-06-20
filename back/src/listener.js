@@ -35,10 +35,6 @@ client.on('chat', async (channel, user, message, isSelf) => {
     await messageApi.insertMessage(channel, user, message);
 });
 
-async function insertMessage(channel, user, message){
-    await db.query("INSERT INTO `chat` (`id`, `channel_id`, `user_name`, `datetime`, `message`) VALUES (NULL, ?, ?, ?, ?);", [channel, user['username'], dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss"), message]);
-}
-
 async function watchChannels() {
     await db.query("SELECT ID FROM channel WHERE watch=true").then(res => {
         res.forEach(row =>{
