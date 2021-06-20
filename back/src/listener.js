@@ -1,7 +1,7 @@
 const config = require('./twitch.json');
 const tmi = require('tmi.js');
 const db = require('./db.js');
-const dateFormat = require('dateformat');
+const messageApi = require('./api/message.js');
 
 const tmiConfig = {
     option: {
@@ -28,18 +28,10 @@ client.on('disconnected', function(){
 });
 
 client.on('chat', async (channel, user, message, isSelf) => {
-    // Do not check himself
     if (isSelf) return;
-
-    console.log("Channel : " + channel + " | User : " + user['username'] + " | Msg : " + message);
-    await insertMessage(channel, user, message);
+    await messageApi.insertMessage(channel, user, message);
 });
 getChannels();
-
-async function insertMessage(channel, user, message){
-    let datetime = dateFormat(new Date(), "yyyy-mm-dd HH:MM:ss");
-    await db.query("INSERT INTO `chat` (`id`, `channel_id`, `user_name`, `datetime`, `message`) VALUES (NULL, ?, ?, ?, ?);", [channel, user['username'], datetime, message]);
-}
 
 async function getChannels() {
     await db.query("SELECT ID FROM streamer WHERE watch=true").then(res => {
