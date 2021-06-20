@@ -51,8 +51,10 @@ function joinChannel(channel) {
     client.join(channel);
     console.log("'" + channel + "' added to the watchlist");
 }
+
 function leaveChannel(channel) {
     client.part(channel);
     console.log("'" + channel + "' removed from the watchlist");
 }
+
 module.exports = { joinChannel, leaveChannel }
