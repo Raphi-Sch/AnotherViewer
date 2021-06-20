@@ -3,9 +3,6 @@ ENV NODE_ENV=production
 
 WORKDIR /src
 
-#COPY ["package.json", "package-lock.json*", "./"]
-#RUN npm install --production
-
 COPY install.sh install.sh
 COPY requirement.txt requirement.txt
 
