@@ -3,3 +3,4 @@ fs
 mysql2
 dateformat
 express
+socket.io

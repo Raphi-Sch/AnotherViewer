@@ -4,7 +4,14 @@ const dateFormat = require('dateformat');
 
 
 var server = http.createServer();
-var io = require('socket.io').listen(server);
+var io = require('socket.io')(server, {
+    allowEIO3: true,
+    cors: {
+        origin: "http://localhost:8088",
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 var web_client = null;
 var web_client_connected = false;
 

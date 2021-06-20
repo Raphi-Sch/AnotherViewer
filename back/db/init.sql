@@ -18,11 +18,13 @@ ALTER TABLE chat
     MODIFY id int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
-CREATE TABLE streamer (
+CREATE TABLE channel (
     id varchar(255) NOT NULL,
     watch boolean not null
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 
-ALTER TABLE streamer
+ALTER TABLE channel
     ADD PRIMARY KEY (id);
+
+DROP TABLE streamer;
