@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title id="bot_name_title">AnotherViewer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+
+    <!-- SweetAlert2 Core -->
+    <script src="sweetalert2-7.28.4/package/dist/sweetalert2.all.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">AnotherViewer</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Main area -->
+        <div class="col-sm-12 main">
+
+          <!-- Tchat Section -->
+          <h2 class="sub-header">Tchat</h2>
+          <button onclick="clear_tchat()" type="button" class="btn btn-info">Clear</button>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Pseudo</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody id="tchat-incoming">
+                  <!-- Tchat add dynamic -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="socket.io.js"></script>
+
+    <script>
+        const socket = io.connect('http://'+ window.location.hostname + ':3000');
+
+        socket.on('tchat-incoming', function(num, pseudo, text, type){
+          var tr = document.createElement('tr');
+          tr.className=type;
+
+          var td_num = document.createElement('td');
+          td_num.appendChild(document.createTextNode(num));
+
+          var td_pseudo = document.createElement('td');
+          td_pseudo.appendChild(document.createTextNode(pseudo));
+
+          var td_text = document.createElement('td');
+          td_text.appendChild(document.createTextNode(text));
+
+          tr.appendChild(td_num);
+          tr.appendChild(td_pseudo);
+          tr.appendChild(td_text);
+
+          document.getElementById('tchat-incoming').insertAdjacentElement('afterbegin',  tr);
+        })
+
+        function clear_tchat(){
+          document.getElementById('tchat-incoming').innerHTML = "";
+        }
+    </script>
+</body></html>
