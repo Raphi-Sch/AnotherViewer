@@ -40,7 +40,7 @@
           <h2 class="sub-header">Chat</h2>
           <button onclick="clear_chat()" type="button" class="btn btn-info">Clear</button>
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-condensed">
               <thead>
                 <tr>
                   <th>Timestamp</th>
@@ -66,22 +66,27 @@
     <script>
         const socket = io.connect('http://'+ window.location.hostname + ':3000');
 
-        socket.on('chat-incoming', function(num, pseudo, text, type){
+        socket.on('log-chat', function(json){
+          data = JSON.parse(json);
+
           var tr = document.createElement('tr');
-          tr.className=type;
 
-          var td_num = document.createElement('td');
-          td_num.appendChild(document.createTextNode(num));
+          var td_timestamp = document.createElement('td');
+          td_timestamp.appendChild(document.createTextNode(data.timestamp));
 
-          var td_pseudo = document.createElement('td');
-          td_pseudo.appendChild(document.createTextNode(pseudo));
+          var td_channel = document.createElement('td');
+          td_channel.appendChild(document.createTextNode(data.channel));
 
-          var td_text = document.createElement('td');
-          td_text.appendChild(document.createTextNode(text));
+          var td_username = document.createElement('td');
+          td_username.appendChild(document.createTextNode(data.username));
 
-          tr.appendChild(td_num);
-          tr.appendChild(td_pseudo);
-          tr.appendChild(td_text);
+          var td_msg = document.createElement('td');
+          td_msg.appendChild(document.createTextNode(data.msg));
+
+          tr.appendChild(td_timestamp);
+          tr.appendChild(td_channel);
+          tr.appendChild(td_username);
+          tr.appendChild(td_msg);
 
           document.getElementById('chat-incoming').insertAdjacentElement('afterbegin',  tr);
         })
