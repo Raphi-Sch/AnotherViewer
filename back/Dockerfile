@@ -6,10 +6,10 @@ WORKDIR /src
 #COPY ["package.json", "package-lock.json*", "./"]
 #RUN npm install --production
 
-RUN npm install tmi.js
-RUN npm install fs
-RUN npm install mysql2
-RUN npm install dateformat
+COPY install.sh install.sh
+COPY requirement.txt requirement.txt
+
+RUN sh install.sh
 
 COPY src .
 

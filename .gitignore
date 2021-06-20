@@ -1,4 +1,6 @@
 # Config file
 db2.json
 twitch.json
+package-lock.json
 .idea/
+node_modules/

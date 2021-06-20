@@ -32,9 +32,8 @@ git clone https://github.com/Raphi-Sch/AnotherViewer.git
 ```
 3. install the required dependencies using npm :
 ```shell
-npm install tmi.js
-npm install fs
-npm install mysql2
+cd ./back
+sh install.sh
 ```
 4. run the project : `node ./src/listener.js`
 
