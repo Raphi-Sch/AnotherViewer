@@ -1,0 +1,7 @@
+{
+    "_COMMENT" : "Set here the correct configuration for your usage, and then rename it config.json and move to the src/ folder. You should make sure this file is not browsable through your web server",
+    "db_host" : "mysql_db",
+    "db_user" : "user",
+    "db_pass" : "password",
+    "db_name" : "db"
+}
