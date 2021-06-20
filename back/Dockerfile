@@ -10,4 +10,4 @@ RUN sh install.sh
 
 COPY src .
 
-CMD [ "node", "listener.js" ]
+CMD [ "node", "server.js" ]
