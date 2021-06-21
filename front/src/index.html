@@ -1,98 +1,162 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title id="bot_name_title">AnotherViewer</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title id="bot_name_title">AnotherViewer</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
 
-    <!-- SweetAlert2 Core -->
-    <script src="sweetalert2-7.28.4/package/dist/sweetalert2.all.min.js"></script>
+  <!-- SweetAlert2 Core -->
+  <script src="sweetalert2-7.28.4/package/dist/sweetalert2.all.min.js"></script>
 
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="dashboard.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand">AnotherViewer</a>
-        </div>
-      </div>
-    </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">AnotherViewer</a>
+    </div>
+  </div>
+</nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <!-- Main area -->
-        <div class="col-sm-12 main">
+<div class="container-fluid">
+  <div class="row">
+    <!-- Main area -->
+    <div class="col-sm-12 main">
 
-          <!-- Tchat Section -->
-          <h2 class="sub-header">Chat</h2>
-          <button onclick="clear_chat()" type="button" class="btn btn-info">Clear</button>
-          <div class="table-responsive">
-            <table class="table table-condensed">
-              <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>Channel</th>
-                  <th>Username</th>
-                  <th>Message</th>
-                </tr>
-              </thead>
-              <tbody id="chat-incoming">
-                  <!-- Tchat add dynamic -->
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <!-- Tchat Section -->
+      <h2 class="sub-header">Chat</h2>
+      <button onclick="clear_chat()" type="button" class="btn btn-info">Clear</button>
+      <div class="table-responsive">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Channel</th>
+            <th>Username</th>
+            <th>Message</th>
+          </tr>
+          </thead>
+          <tbody id="chat-incoming">
+          <!-- Tchat add dynamic -->
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="socket.io.js"></script>
+<!-- Footer -->
+<script src="bootstrap-3.3.7-dist/js/jquery.js"></script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="socket.io.js"></script>
 
-    <script>
-        const socket = io.connect('http://'+ window.location.hostname + ':3000');
+<script>
+    const socket = io.connect('http://' + window.location.hostname + ':3000');
 
-        socket.on('log-chat', function(json){
-          data = JSON.parse(json);
+    socket.on('log-chat', function (json) {
+        data = JSON.parse(json);
 
-          var tr = document.createElement('tr');
+        var tr = document.createElement('tr');
 
-          var td_timestamp = document.createElement('td');
-          td_timestamp.appendChild(document.createTextNode(data.timestamp));
+        var td_timestamp = document.createElement('td');
+        td_timestamp.appendChild(document.createTextNode(data.timestamp));
 
-          var td_channel = document.createElement('td');
-          td_channel.appendChild(document.createTextNode(data.channel));
+        var td_channel = document.createElement('td');
+        td_channel.appendChild(document.createTextNode(data.channel));
 
-          var td_username = document.createElement('td');
-          td_username.appendChild(document.createTextNode(data.username));
+        var td_username = document.createElement('td');
+        td_username.appendChild(document.createTextNode(data.username));
 
-          var td_msg = document.createElement('td');
-          td_msg.appendChild(document.createTextNode(data.msg));
+        var td_msg = document.createElement('td');
+        td_msg.appendChild(document.createTextNode(data.msg));
 
-          tr.appendChild(td_timestamp);
-          tr.appendChild(td_channel);
-          tr.appendChild(td_username);
-          tr.appendChild(td_msg);
+        tr.appendChild(td_timestamp);
+        tr.appendChild(td_channel);
+        tr.appendChild(td_username);
+        tr.appendChild(td_msg);
 
-          document.getElementById('chat-incoming').insertAdjacentElement('afterbegin',  tr);
-        })
+        document.getElementById('chat-incoming').insertAdjacentElement('afterbegin', tr);
+    })
 
-        function clear_chat(){
-          document.getElementById('chat-incoming').innerHTML = "";
+    function clear_chat() {
+        document.getElementById('chat-incoming').innerHTML = "";
+    }
+</script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages: ["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        function getPieChart(array, div) {
+            var data = google.visualization.arrayToDataTable(array);
+            var options = {
+                title: 'Occurrences of character as first message\'s character',
+                pieHole: 0.4,
+                chartArea: {
+                    backgroundColor: {
+                        fill: '#0E0E10'
+                    },
+                },
+                backgroundColor: {
+                    fill: '#0E0E10'
+                },
+                legendTextStyle: {color: '#FFF'},
+                titleTextStyle: {color: '#FFF'},
+                hAxis: {textStyle: {color: '#FFF'}},
+                vAxis: {textStyle: {color: '#FFF'}},
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById(div));
+            chart.draw(data, options);
         }
-    </script>
-</body></html>
+
+        axios.get(`http://localhost:8080/stat/tonton/word`)
+            .then(res => {
+                var dataResponce = res.data;
+                var array = [["character", "occurence"]]
+                Object.keys(dataResponce.stat).forEach(function(k){
+                    array.push([k, dataResponce.stat[k]]);
+                });
+                getPieChart(array, 'chart_word_div');
+            });
+        axios.get(`http://localhost:8080/stat/tonton/alphabet`)
+            .then(res => {
+                var dataResponce = res.data;
+                var array = [["character", "occurence"]]
+                Object.keys(dataResponce.stat).forEach(function(k){
+                    array.push([k, dataResponce.stat[k]]);
+                });
+                getPieChart(array, 'chart_alphabet_div');
+            })
+    }
+</script>
+<table>
+  <tr>
+    <td>
+      <div id="chart_alphabet_div" style="width: 900px; height: 500px;"></div>
+    </td>
+    <td>
+      <div id="chart_word_div" style="width: 900px; height: 500px;"></div>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
