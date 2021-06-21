@@ -21,7 +21,7 @@ git clone https://github.com/Raphi-Sch/AnotherViewer.git
 
 ## If you want to run it without docker :
 1. create a mysql db 
-2. in the `src` folder, add `db2.json.json` :
+2. in the `src` folder, add `db2.json` :
 ```json
 {
   "db_host" : "your host",
